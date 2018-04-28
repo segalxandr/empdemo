@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { catchError } from 'rxjs/operators';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/filter';
 
 import { IEmployee } from './employee';
+import { error } from 'protractor';
+import { get } from 'http';
+import { map } from 'rxjs/operator/map';
 
 @Injectable()
 export class EmployeeService {
@@ -53,6 +57,8 @@ export class EmployeeService {
       profileImage: 'http://via.placeholder.com/28x28'
     }
   ];
+  avaId: string;
+  avatar: string;
   constructor(private http: Http) {}
   getEmployee(employeeId: number): Observable<any> {
     const subject = new Subject<any>();
@@ -79,21 +85,44 @@ export class EmployeeService {
     return subject;
   }
   getImg(emp: IEmployee): void {
-     console.log(emp.profileImage);
+    console.log(emp.profileImage);
     if (emp.profileImage.indexOf('placeholder') === -1) {
       return;
     }
     let str: string;
-    this.http
+    str = this.makeAvatarRequest();
+    this.EMPLOYEES.find(e => e.id === emp.id).profileImage = str;
+    const obs$ = this.http
       .get('https://uinames.com/api/?ext&amount=1&gender=' + emp.gender)
       .map((response: Response) => {
-        const d = response.json();
-        return d;
-      })
-      .subscribe(data => {
+        if (!response.ok) {
+          return;
+        } else {
+          const d = response.json();
+          return d;
+        }
+      });
+
+    obs$.subscribe(
+      data => {
         str = data.photo;
         this.EMPLOYEES.find(e => e.id === emp.id).profileImage = str;
         // console.log(this.EMPLOYEES.find(e => e.id === emp.id).profileImage);
-      });
+      },
+      err => {
+        console.error('Oops:', err);
+      }
+    );
+  }
+  makeAvatarRequest(): string {
+    this.avaId =
+      Math.random()
+        .toString(36)
+        .substring(2, 2) +
+      Math.random()
+        .toString(36)
+        .substring(2, 3);
+    console.log('avaId: ', this.avaId);
+    return (this.avatar = 'https://api.adorable.io/avatars/55/' + this.avaId);
   }
 }
