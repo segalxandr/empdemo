@@ -59,6 +59,7 @@ export class EmployeeService {
   ];
   avaId: string;
   avatar: string;
+  useUiNames = false;
   constructor(private http: Http) {}
   getEmployee(employeeId: number): Observable<any> {
     const subject = new Subject<any>();
@@ -85,34 +86,46 @@ export class EmployeeService {
     return subject;
   }
   getImg(emp: IEmployee): void {
+    // Toggle this to avoid hitting uinames
+    this.useUiNames = true;
     console.log(emp.profileImage);
     if (emp.profileImage.indexOf('placeholder') === -1) {
       return;
     }
     let str: string;
+    // Used as substitute
     str = this.makeAvatarRequest();
     this.EMPLOYEES.find(e => e.id === emp.id).profileImage = str;
-    const obs$ = this.http
-      .get('https://uinames.com/api/?ext&amount=1&gender=' + emp.gender)
-      .map((response: Response) => {
-        if (!response.ok) {
-          return;
-        } else {
-          const d = response.json();
-          return d;
-        }
-      });
 
-    obs$.subscribe(
-      data => {
-        str = data.photo;
-        this.EMPLOYEES.find(e => e.id === emp.id).profileImage = str;
-        // console.log(this.EMPLOYEES.find(e => e.id === emp.id).profileImage);
-      },
-      err => {
-        console.error('Oops:', err);
-      }
-    );
+    if (this.useUiNames) {
+      const region = 'United States';
+      const obs$ = this.http
+        .get(
+          'https://uinames.com/api/?ext&amount=1&gender=' +
+            emp.gender +
+            '&region=' +
+            region
+        )
+        .map((response: Response) => {
+          if (!response.ok) {
+            return;
+          } else {
+            const d = response.json();
+            return d;
+          }
+        });
+
+      obs$.subscribe(
+        data => {
+          str = data.photo;
+          this.EMPLOYEES.find(e => e.id === emp.id).profileImage = str;
+          // console.log(this.EMPLOYEES.find(e => e.id === emp.id).profileImage);
+        },
+        err => {
+          console.error('Oops:', err);
+        }
+      );
+    }
   }
   makeAvatarRequest(): string {
     this.avaId =
