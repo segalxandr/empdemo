@@ -1,0 +1,51 @@
+th,
+td {
+  font-size: 1.1em;
+  padding: 5px 10px;
+  line-height: 53px!Important;
+}
+#tdName, #tdTitle {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #555555;
+}
+tr {
+  cursor: pointer;
+}
+/*#*/
+.table-bordered {
+  border: 2px solid #222222;
+}
+
+.table-bordered td,
+.table-bordered th {
+  border-bottom: 2px solid #222222;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #d9f3e6;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #eef2d9;
+}
+.table .thead-dark th {
+  color: #fff;
+  background-color: #77a3a5;
+  border-right-color: #77a3a5;
+}
+.lstImg {
+  width: 52px;
+  height: 58px;
+  border: 2px solid black;
+}
+.active{
+  border: none !important;
+  box-shadow: aquamarine !important;
+  color:rgba(45, 35, 185, 0.746) !important;
+}
+.btn:focus {
+  border: none !important;
+  /* border-color: #FF0000 !important; */
+  /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6) !important; */
+  box-shadow: none !important;
+}

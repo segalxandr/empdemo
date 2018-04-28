@@ -1,3 +1,39 @@
-<p>
-  employee works!
-</p>
+<div class="container  jumbotron">
+  <div class="row">
+    <div class="col-2">
+
+      <a title="Go back" class="btn btn-primary" (click)="goBack()">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+      </a>
+    </div>
+    <div class="col-10" >
+
+      <h4>
+        <em>{{employee.title}}</em>
+      </h4>
+    </div>
+  </div>
+
+  <hr>
+  <table>
+    <colgroup>
+      <col style="width: 120px">
+      <col style="min-width: 160px">
+      <col style="width: 50px">
+    </colgroup>
+    <tr>
+      <th rowspan="2">
+        <img id="imgContainer" src={{employee.profileImage}} alt={{employee.name}} title={{employee.name}} style="width:100px; height:100px;">
+      </th>
+      <th id="infoName"></th>
+      <th rowspan="2" style="vertical-align: top;">
+
+
+      </th>
+    </tr>
+    <tr>
+      <td id="infoTitle">{{employee.name}}</td>
+    </tr>
+  </table>
+
+</div>

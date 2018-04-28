@@ -1,0 +1,22 @@
+#imgContainer {
+  width: 100px;
+  height: 100px;
+  background: salmon;
+  float: left;
+  margin: 0 20px 0 0;
+}
+#imgContainer {
+  -webkit-box-shadow: 13px 13px 0px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 13px 13px 0px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 13px 13px 0px 0px rgba(0, 0, 0, 0.75);
+}
+#infoName,
+#infoTitle {
+  font-family: Helvetica, sans-serif;
+  vertical-align: top;
+}
+#infoTitle {
+  font-weight: bold;
+  font-size: 1.3em;
+  color: #df691a;
+}
