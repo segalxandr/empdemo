@@ -6,10 +6,16 @@
   margin: 0 20px 0 0;
 }
 #imgContainer {
-  -webkit-box-shadow: 13px 13px 0px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 13px 13px 0px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 13px 13px 0px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 13px 13px 0px 0px #77a3a5;
+  -moz-box-shadow: 13px 13px 0px 0px #77a3a5;
+  box-shadow: 13px 13px 0px 0px #77a3a5;
 }
+img {
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+}
+
 #infoName,
 #infoTitle {
   font-family: Helvetica, sans-serif;

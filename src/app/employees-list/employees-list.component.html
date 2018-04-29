@@ -9,22 +9,24 @@
   <table class="table table-responsive-sm table-sm table-striped table-hover table-bordered">
     <thead class="thead-dark">
       <tr>
-        <th style="text-align:left;">Profile
+        <th >Profile
         </th>
-        <th style="width:30%">Employee&nbsp;Name
-          <button class="btn btn-sm btn-primary" (click)="sortBy='name'" [class.active]="sortBy==='name'">
+        <th >Employee&nbsp;Name
+          <button class="btn btn-sm btn-primary " (click)="sortBy='name'" [class.active]="sortBy==='name'">
             <i class="glyphicon glyphicon-sort"></i>
           </button>
         </th>
-        <th style="width:50%">
-          <div class="float-left">
+        <th >
+          <div>
             Job&nbsp;Title
-            <button class="btn btn-sm btn-primary" (click)="sortBy='title'" [class.active]="sortBy==='title'">
+            <button class="btn btn-sm btn-primary " (click)="sortBy='title'" [class.active]="sortBy==='title'">
               <i class="glyphicon glyphicon-sort"></i>
             </button>
           </div>
+        </th>
+        <th>
           <div class="float-right">
-            <a title={{showTable}} class="btn btn-primary" (click)="toggleData()">
+            <a title={{showTable}} class="btn btn-primary btn-sm" (click)="toggleData()">
               <i *ngIf="showData" class="glyphicon glyphicon-chevron-up"></i>
               <i *ngIf="!showData" class="glyphicon glyphicon-chevron-down"></i>
             </a>
@@ -36,10 +38,10 @@
       <tr *ngFor="let employee of employees" [routerLink]="['/employees', employee.id]" title="{{employee.name}}">
         <td>
           <img *ngIf="showImage && employee.profileImage" src={{employee.profileImage}} title={{employee.name}} alt={{employee.name}}
-            class="lstImg">
+            >
         </td>
         <td id="tdName">{{employee.name}}</td>
-        <td id="tdTitle">{{employee.title}} </td>
+        <td colspan="2" id="tdTitle">{{employee.title}} </td>
 
       </tr>
     </tbody>

@@ -2,9 +2,10 @@ th,
 td {
   font-size: 1.1em;
   padding: 5px 10px;
-  line-height: 53px!Important;
+  line-height: 53px !important;
 }
-#tdName, #tdTitle {
+#tdName,
+#tdTitle {
   font-weight: bold;
   font-size: 1.1em;
   color: #555555;
@@ -33,19 +34,31 @@ tr {
   background-color: #77a3a5;
   border-right-color: #77a3a5;
 }
-.lstImg {
+img {
   width: 52px;
   height: 58px;
   border: 2px solid black;
 }
-.active{
+.active {
   border: none !important;
   box-shadow: aquamarine !important;
-  color:rgba(45, 35, 185, 0.746) !important;
+  color: rgba(45, 35, 185, 0.746) !important;
 }
 .btn:focus {
   border: none !important;
   /* border-color: #FF0000 !important; */
   /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6) !important; */
   box-shadow: none !important;
+}
+  thead th {
+    vertical-align: top;
+  }
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  /* Styles */
+  thead th {
+    font-size: 12px;
+    vertical-align: top;
+  }
 }
