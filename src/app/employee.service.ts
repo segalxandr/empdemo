@@ -64,7 +64,7 @@ export class EmployeeService {
 
   getEmployee(employeeId: number): Observable<IEmployee> {
     const subject = new Subject<IEmployee>();
-    console.log(employeeId);
+    // console.log(employeeId);
     setTimeout(() => {
       const emp = this.EMPLOYEES.find(employee => employee.id === Number(employeeId));
       this.getImg(emp);
@@ -89,7 +89,7 @@ export class EmployeeService {
   getImg(emp: IEmployee): void {
     // Toggle this to avoid hitting uinames
     this.useUiNames = true;
-    console.log(emp.profileImage);
+    // console.log(emp.profileImage);
     if (emp.profileImage.indexOf('placeholder') === -1) {
       return;
     }
@@ -130,7 +130,7 @@ export class EmployeeService {
       Math.random()
         .toString(36)
         .substring(2, 3);
-    console.log('avaId: ', this.avaId);
+    // console.log('avaId: ', this.avaId);
     return (this.avatar = 'https://api.adorable.io/avatars/55/' + this.avaId);
   }
 }

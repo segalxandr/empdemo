@@ -24,7 +24,7 @@ export class EmployeesListComponent implements OnInit {
   }
   set sortBy(val: string) {
     this._sortBy = val;
-    console.log('sort set', val);
+    // console.log('sort set', val);
     this.sortBy === 'name'
     ? this.employees.sort(sortByNameAsc)
     : this.employees.sort(sortByTitleAsc);
@@ -39,12 +39,12 @@ export class EmployeesListComponent implements OnInit {
     this.showTable = this.showData ? 'Hide Table' : 'Show Table';
   }
   ngOnInit() {
-    console.log('init');
+    // console.log('init');
     this.employees = this.route.snapshot.data['employees'];
   }
 
   setSort(s: string) {
-    console.log('setSort', s);
+    // console.log('setSort', s);
     this.sortBy = s;
   }
 }

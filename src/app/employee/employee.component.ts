@@ -20,6 +20,6 @@ export class EmployeeComponent implements OnInit {
     const id = this.route.snapshot.params['id'];
     this.pageTitle = this.pageTitle + ', id: ' + id;
     this.employee = this.employeeService.getEmployee(id).subscribe(employee => (this.employee = employee));
-    console.log('​EmployeeComponent -> ngOnInit -> this.employee', this.employee);
+    // console.log('​EmployeeComponent -> ngOnInit -> this.employee', this.employee);
   }
 }
