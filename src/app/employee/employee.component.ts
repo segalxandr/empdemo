@@ -12,19 +12,14 @@ import { EmployeeService } from '../employee.service';
 export class EmployeeComponent implements OnInit {
   pageTitle = 'Employee Detail';
   employee: any;
-  constructor(
-    private employeeService: EmployeeService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private router: Router) {}
   goBack() {
     this.router.navigate(['/employees']);
   }
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
     this.pageTitle = this.pageTitle + ', id: ' + id;
-    this.employee = this.employeeService
-      .getEmployee(id)
-      .subscribe(employee => (this.employee = employee));
+    this.employee = this.employeeService.getEmployee(id).subscribe(employee => (this.employee = employee));
+    console.log('​EmployeeComponent -> ngOnInit -> this.employee', this.employee);
   }
 }

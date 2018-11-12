@@ -61,15 +61,16 @@ export class EmployeeService {
   avatar: string;
   useUiNames = false;
   constructor(private http: Http) {}
-  getEmployee(employeeId: number): Observable<any> {
-    const subject = new Subject<any>();
+
+  getEmployee(employeeId: number): Observable<IEmployee> {
+    const subject = new Subject<IEmployee>();
     console.log(employeeId);
     setTimeout(() => {
-      subject.next(
-        this.EMPLOYEES.find(employee => employee.id === +employeeId)
-      );
+      const emp = this.EMPLOYEES.find(employee => employee.id === Number(employeeId));
+      this.getImg(emp);
+      subject.next(emp);
       subject.complete();
-    }, 1000);
+    }, 500);
     return subject;
   }
 
@@ -100,12 +101,7 @@ export class EmployeeService {
     if (this.useUiNames) {
       const region = 'United States';
       const obs$ = this.http
-        .get(
-          'https://uinames.com/api/?ext&amount=1&gender=' +
-            emp.gender +
-            '&region=' +
-            region
-        )
+        .get('https://uinames.com/api/?ext&amount=1&gender=' + emp.gender + '&region=' + region)
         .map((response: Response) => {
           if (!response.ok) {
             return;
@@ -113,18 +109,17 @@ export class EmployeeService {
             const d = response.json();
             return d;
           }
-        });
-
-      obs$.subscribe(
-        data => {
-          str = data.photo;
-          this.EMPLOYEES.find(e => e.id === emp.id).profileImage = str;
-          // console.log(this.EMPLOYEES.find(e => e.id === emp.id).profileImage);
-        },
-        err => {
-          console.error('Oops:', err);
-        }
-      );
+        })
+        .subscribe(
+          data => {
+            str = data.photo;
+            this.EMPLOYEES.find(e => e.id === emp.id).profileImage = str;
+            // console.log(this.EMPLOYEES.find(e => e.id === emp.id).profileImage);
+          },
+          err => {
+            console.error('Oops:', err);
+          }
+        );
     }
   }
   makeAvatarRequest(): string {
